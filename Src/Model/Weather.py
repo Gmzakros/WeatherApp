@@ -1,8 +1,9 @@
 import ParseData
 import datetime
+import time
 
 
-def hourlyData():
+def getHourlyData():
     dict = ParseData.getData()['hourly']
     timesAndTemps = {}
     for i in range(len(dict['time'])):
@@ -15,4 +16,11 @@ def getWindSpeed():
     dict = ParseData.getData()
     return dict
 
-print(hourlyData())
+def getCurrentTemp():
+    t = time.localtime()
+    currentTime = time.strftime('%H', t)
+    dict = getHourlyData()
+
+    return int(dict[currentTime])
+
+
