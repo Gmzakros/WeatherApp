@@ -1,5 +1,4 @@
 
-
 def printStart():
     print()
     print('Welcome to Wild Weather')
@@ -9,7 +8,7 @@ def printStart():
     #Place Holder Values
 def printTable():
     str = '{0: ^15}{1: ^15}{2: ^15}{3: ^15}{4: ^15}'.format('Current Tempature', 'Low', 'High', 'Humidity', 'Wind Speed')
-    data = '  {0: ^15}{1: ^15}{2: ^15}{3: ^15}{4: ^15}'.format('60', '58', '80', '75%', '12 mph')
+    data = '  {0: ^15}{1: ^15}{2: ^15}{3: ^15}{4: ^15}'.format(Model.getCurrentTemp(), '58', '80', '75%', '12 mph')
     print(str)
     print('------------------------------------------------------------------------------------')
     print(data)
@@ -17,4 +16,6 @@ def printTable():
 def main():
     printStart()
     printTable()
+
+printTable()
     
