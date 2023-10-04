@@ -1,4 +1,3 @@
-
 import sys
 import os
 
@@ -7,13 +6,13 @@ print (data_path)
 sys.path.append(data_path)
 from Model import Weather
 
+
 def printStart():
     print()
     print('Welcome to Wild Weather')
     print('Here is the forcast for today:\n')
 
 
-    #Place Holder Values
 def printTable(currentTemp, high, low, humidity, windSpeed, day):
     str = '{0: ^20}{1: ^20}{2: ^20}{3: ^20}{4: ^20}{5: ^20}'.format('Days From Today','Current Tempature', 'Low', 'High', 'Humidity', 'Wind Speed')
     data = '{0: ^20}{1: ^20}{2: ^20}{3: ^20}{4: ^20}{5: ^20}'.format(day, currentTemp, low, high, humidity + '%', windSpeed + ' mph')
@@ -25,6 +24,7 @@ def printTable(currentTemp, high, low, humidity, windSpeed, day):
 def printToday():
     printStart()
     printTable(Weather.getCurrentTemp(), Weather.getHighLow()[0], Weather.getHighLow()[1], Weather.getHumidity(), Weather.getWindSpeed(), 0)
+
 
 def printHourly():
     print()
@@ -40,7 +40,6 @@ def printHourly():
     print(data)
 
 
-
 def print7day():
     print()
 
@@ -49,7 +48,7 @@ def print7day():
     data =''
 
     for i in dict:
-        data += '{0: ^20}{1: ^20}{2: ^20}        {3}%\n'.format(i, dict[i][0], dict[i][1], dict[i][2])
+        data += '{0: ^20}{1: ^20}{2: ^20}{3:>11}\n'.format(i, dict[i][0] + '°F', dict[i][1] + '°F', dict[i][2] + '%')
 
     print(str)
     print('------------------------------------------------------------------------------')
@@ -68,13 +67,10 @@ def handleInput():
             print('invalid input')
             handleInput()
 
+
 def main():
     printToday()
     handleInput()
-    
-
-    
-
 
 
 if __name__ == '__main__':

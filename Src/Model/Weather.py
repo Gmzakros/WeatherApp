@@ -73,6 +73,6 @@ def getWeatherPerDay():
     precpitation = getPrecipitationPerDay()
     res = {}
     for i in range(len(dict["temperature_2m_max"])):
-        res[i] = (dict["temperature_2m_max"][i], dict["temperature_2m_min"][i], precpitation[i])
+        res[i] = (str(int(dict["temperature_2m_max"][i])), str(int(dict["temperature_2m_min"][i])), str(precpitation[i]))
     return res
 
