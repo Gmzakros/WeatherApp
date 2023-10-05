@@ -1,27 +1,48 @@
-import customtkinter
+import customtkinter as ct
 from tkinter import *
 from PIL import Image
+def weekForcast():
+    print('7day')
 
 
-customtkinter.set_appearance_mode("dark")
-customtkinter.set_default_color_theme("dark-blue")
+def currentForcast():
+    print('current')
+
+ct.set_appearance_mode("dark")
+ct.set_default_color_theme("dark-blue")
 
 
-root  = customtkinter.CTk()
+root  = ct.CTk()
 root.geometry("500x350")
 
-def login():
-    print('test')
+frameStartPage = ct.CTkFrame(master=root)
+frameStartPage.pack(padx=20, pady=40, fill='both', expand=True)
 
-frame = customtkinter.CTkFrame(master=root)
-frame.pack(pady=20,padx=60, fill="both", expand=True)
+label = ct.CTkLabel(master=frameStartPage, text='Welcome to Wild Weather', text_color="orange")
+label.pack(padx=10, pady=10)
 
-label = customtkinter.CTkLabel(master=frame, text="Login System")
-label.pack(pady=12,padx=10)
+img = ct.CTkImage(Image.open('./Assets/noBackroundStartPage.png'))
+img._size = [100, 100]
 
-img = Image.open(".\\Assets\\new.png")
+imgLabel = ct.CTkLabel(master=frameStartPage, text='', image= img)
+imgLabel.pack(padx=10, pady=10)
 
-label2 = customtkinter.CTkLabel(master=frame, image=img, text="")
-label2.pack(pady=12, padx=10)
+
+currentForcastBtn = ct.CTkButton(master=frameStartPage, text="View Current Forcast",command= currentForcast)
+currentForcastBtn.pack(padx=10,pady=10)
+
+weekForcastBtn = ct.CTkButton(master=frameStartPage, text="View 7 Day Forcast",command=weekForcast)
+weekForcastBtn.pack(padx=10,pady=10)
+
+
+
+
+
+
+
+
+
+
+
 
 root.mainloop()
