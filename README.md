@@ -6,3 +6,5 @@ How to run Wild Weather
 2. navaegate to the repos location in your file system.
 3. run command:```pip install -r requirements.txt```
 4. navegate to the src folder and run command: ```python3 ViewGUI.py```
+
+I am aware that the read me needs loads more attention
