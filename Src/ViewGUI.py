@@ -24,6 +24,7 @@ WeatherPerDay = Weather.getWeatherPerDay()
 def weekForcast():
     makeNewWindow()
     weekForcastPage()
+    root.mainloop()
 
 
 def makeNewWindow():
@@ -37,6 +38,7 @@ def makeNewWindow():
 def currentForcast():
     makeNewWindow()
     currentForcastPage()
+    root.mainloop()
     
 
 
@@ -133,6 +135,7 @@ def weekForcastPage():
 def openStart():
     makeNewWindow()
     startPage()
+    root.mainloop()
 
 
 def startPage():
