@@ -89,7 +89,6 @@ def getWeeklyWeatherCode():
         else:
             weatherLst.append(processWeatherCode(weatherCodes[i], True))
         
-    print(weatherLst)
     return weatherLst
 
 
@@ -119,7 +118,7 @@ def processWeatherCode(code, weekly):
         case 3:
             return 'Cloudy'
         case 45:
-            return 'Foggy'
+            return 'Mostly Sunny'
         case 48:
             return 'Rime Fog'
         case 51:
@@ -168,6 +167,3 @@ def processWeatherCode(code, weekly):
             return "Thunderstorm With Hail"
         case _:
             return "Whoops"
-
-
-getWeeklyWeatherCode()

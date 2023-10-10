@@ -1,13 +1,18 @@
 from rembg import remove
 from PIL import Image
+import os
+
+dir = '.\\Assets'
+for file in os.listdir(dir):
+    f = os.path.join(dir, file)
+    # checking if it is a file
+    if os.path.isfile(f):
+        inputImg = Image.open(f)
+        outputImg = remove(inputImg)
+        outputImg.save(f)
 
 
-i = input('enter the name of the file you want to remove: ')
-
-s = input('save name for file: ')
 
 
-inputImg = Image.open(".\\Assets\\" + i)
-outputImg = remove(inputImg)
-outputImg.save('.\\Assets\\' + s)
+
 

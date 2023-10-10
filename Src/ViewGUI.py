@@ -79,7 +79,13 @@ def currentForcastPage():
     quitBtn.pack(padx= 10, pady = 20)
 
     mainCurentTitle = ct.CTkLabel(master = mainFrame, text= 'Current Weather')
-    mainCurentTitle.pack(padx= 10, pady= 15, side= 'top')
+    mainCurentTitle.pack(padx= 10, pady= (10, 8), side= 'top')
+
+    img = getWeatherIcon()
+    img._size = [100, 100]
+
+    weatherIconLabel = ct.CTkLabel(master=mainFrame, text='', image= img)
+    weatherIconLabel.pack(padx=10, pady=(0, 0), side= 'top')
 
     curentTempLabel = ct.CTkLabel(master = mainFrame, text= CurrentTemp, font= ('', 20))
     curentTempLabel.pack(padx= 10, pady= 7, side= 'top')
@@ -98,6 +104,70 @@ def currentForcastPage():
 
 
 
+def getWeatherIcon():
+    match CurWeather:
+        case 'Sunny':
+            return ct.CTkImage(Image.open('./Assets/new.png'))
+        case 'Clear':
+            return ct.CTkImage(Image.open('./Assets/Clear.png'))
+        case 'Mainly Sunny':
+            return ct.CTkImage(Image.open('./Assets/Mainly sunny.png'))
+        case 'Mainly Clear':
+            return ct.CTkImage(Image.open('./Assets/Mainly clear.png'))
+        case 'Partly Cloudly':
+            return ct.CTkImage(Image.open('./Assets/Partly cloudy.png'))
+        case 'Cloudy':
+            return ct.CTkImage(Image.open('./Assets/Cloudly.png'))
+        case 'Mostly Sunny':
+            return ct.CTkImage(Image.open('./Assets/Mainly Sunny.png'))
+        case 'Rime Fog':
+            return ct.CTkImage(Image.open('./Assets/Rime Fog.png'))
+        case 'Light Drizzle':
+            return ct.CTkImage(Image.open('./Assets/Light Drizzle.png'))
+        case 'Drizzle':
+            return ct.CTkImage(Image.open('./Assets/Drizzle.png'))
+        case 'Heavy Drizzle':
+            return ct.CTkImage(Image.open('./Assets/Heavy Drizzle.png'))
+        case 'Light Freezing Drizzle':
+            return ct.CTkImage(Image.open('./Assets/Light Drizzle.png'))
+        case 'Freezing Drizzle':
+            return ct.CTkImage(Image.open('./Assets/Freezing Drizzle.png'))
+        case 'Light Rain':
+            return ct.CTkImage(Image.open('./Assets/Rain.png'))
+        case 'Rain':
+            return ct.CTkImage(Image.open('./Assets/Rain.png'))
+        case 'Heavy Rain':
+            return ct.CTkImage(Image.open('./Assets/Rain.png'))
+        case 'Light Freezing Rain':
+            return ct.CTkImage(Image.open('./Assets/Rain.png'))
+        case 'Freezing Rain':
+            return ct.CTkImage(Image.open('./Assets/Freezing Drizzle.png'))
+        case 'Light Snow':
+            return ct.CTkImage(Image.open('./Assets/Snow.png'))
+        case 'Snow':
+            return ct.CTkImage(Image.open('./Assets/Snow.png'))
+        case 'Heavy Snow':
+            return ct.CTkImage(Image.open('./Assets/Snow.png'))
+        case 'Snow Grains':
+            return ct.CTkImage(Image.open('./Assets/Snow.png'))
+        case 'Light Showers':
+            return ct.CTkImage(Image.open('./Assets/Rain.png'))
+        case 'Showers':
+            return ct.CTkImage(Image.open('./Assets/Rain.png'))
+        case 'Heavy Showers':
+            return ct.CTkImage(Image.open('./Assets/Rain.png'))
+        case 'Light Snow Showers':
+            return ct.CTkImage(Image.open('./Assets/Snow.png'))
+        case 'Snow Showers':
+            return ct.CTkImage(Image.open('./Assets/Snow.png'))
+        case 'Thunderstorm':
+            return ct.CTkImage(Image.open('./Assets/Thunderstorms.png'))
+        case 'Light Thunderstorms With Hail':
+            return ct.CTkImage(Image.open('./Assets/Thunderstorms.png'))
+        case 'Thunderstorm With Hail':
+            return ct.CTkImage(Image.open('./Assets/Thunderstorms.png'))
+        case _:
+            return
 
 def changeMode():
     global isDarkMode
