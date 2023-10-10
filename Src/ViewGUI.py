@@ -15,15 +15,24 @@ isDarkMode = True
 
 root  = ct.CTk()
 root.geometry("650x500")
-root.resizable(False, False)
 root.title("Wild Weather")
 
 
 WeatherPerDay = Weather.getWeatherPerDay()
 
+
+CurrentTemp = Weather.getCurrentTemp()
+CurHighAndLow = Weather.getHighLow()
+CurHumidity = Weather.getHumidity()
+CurWindSpeed = Weather.getWindSpeed()
+CurWeather = Weather.getWeeklyWeatherCode()[0]
+
+
+
 def weekForcast():
     makeNewWindow()
     weekForcastPage()
+    root.mainloop()
 
 
 def makeNewWindow():
@@ -31,24 +40,29 @@ def makeNewWindow():
     root.destroy()
     root =ct.CTk()
     root.geometry("650x475")
-    root.resizable(False, False)
     root.title("Wild Weather")
 
 def currentForcast():
     makeNewWindow()
     currentForcastPage()
+    root.mainloop()
     
 
 
 def currentForcastPage():
-    global WeatherPerDay
-    frame = ct.CTkCanvas(master=root)
-    frame.pack(padx=20, pady=30, fill= 'both', expand=True, side='right')
+    global WeatherPerDay, CurrentTemp, CurHighAndLow, CurHumidity, CurWindSpeed,CurRainChance
+    frame = ct.CTkFrame(master=root)
+    frame.pack(padx=20, pady=20, fill= 'both', expand=True, side='right')
 
     sideFrame = ct.CTkFrame(master=root, width=50)
     sideFrame.pack(padx= 20, pady= 20, side= 'left',fill='both', expand=True)
 
-    
+    mainFrame = ct.CTkFrame(master= frame)
+    mainFrame.pack(padx=10, pady=15, fill= 'both', expand=True, side='top')
+
+    scrollFrame = ct.CTkScrollableFrame(master= frame, orientation='horizontal',height= 50)
+    scrollFrame.pack(padx=10, pady=15, fill= 'both', expand=True, side='bottom')
+
     menuLabel = ct.CTkLabel(master= sideFrame, text= "Menu", text_color= 'orange')
     menuLabel.pack(padx=5, pady= 10)
 
@@ -63,6 +77,26 @@ def currentForcastPage():
 
     quitBtn = ct.CTkButton(master = sideFrame, text= 'Quit', command= root.destroy)
     quitBtn.pack(padx= 10, pady = 20)
+
+    mainCurentTitle = ct.CTkLabel(master = mainFrame, text= 'Current Weather')
+    mainCurentTitle.pack(padx= 10, pady= 15, side= 'top')
+
+    curentTempLabel = ct.CTkLabel(master = mainFrame, text= CurrentTemp, font= ('', 20))
+    curentTempLabel.pack(padx= 10, pady= 7, side= 'top')
+
+    currentHighLabel = ct.CTkLabel(master = mainFrame, text= CurHighAndLow[1])
+    currentHighLabel.pack(padx= (30, 10), pady= 7, side= 'left')
+
+    curentLowLabel = ct.CTkLabel(master = mainFrame, text= CurHighAndLow[0])
+    curentLowLabel.pack(padx= 10, pady= 7, side= 'left')
+
+    curentHumidityLabel = ct.CTkLabel(master = mainFrame, text= CurHumidity)
+    curentHumidityLabel.pack(padx= 10, pady= 7, side= 'left')
+
+    curentWindSpeedLabel = ct.CTkLabel(master = mainFrame, text= CurWindSpeed)
+    curentWindSpeedLabel.pack(padx= 10, pady= 7, side= 'left')
+
+
 
 
 def changeMode():
@@ -133,6 +167,7 @@ def weekForcastPage():
 def openStart():
     makeNewWindow()
     startPage()
+    root.mainloop()
 
 
 def startPage():
@@ -163,17 +198,18 @@ def startPage():
     quitBtn.pack(padx= 10, pady = 10)
 
 
-
-
-
-
-
-
 def main():
-    
     
     startPage()
     root.mainloop()
+
+    global WeatherPerDay, CurrentTemp, CurHighAndLow, CurHumidity, CurWindSpeed,CurRainChance
+    WeatherPerDay = Weather.getWeatherPerDay()
+    CurrentTemp = Weather.getCurrentTemp()
+    CurHighAndLow = Weather.getHighLow()
+    CurHumidity = Weather.getHumidity()
+    CurWindSpeed = Weather.getWindSpeed()
+    CurRainChance = Weather.getPrecipitationPerDay()[0]
 
 
 if __name__ == "__main__":
