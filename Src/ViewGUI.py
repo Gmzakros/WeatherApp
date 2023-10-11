@@ -51,8 +51,9 @@ def currentForcast():
 
 def currentForcastPage():
     global WeatherPerDay, CurrentTemp, CurHighAndLow, CurHumidity, CurWindSpeed,CurRainChance
-    frame = ct.CTkFrame(master=root)
+    frame = ct.CTkScrollableFrame(master=root, orientation= 'vertical')
     frame.pack(padx=20, pady=20, fill= 'both', expand=True, side='right')
+
 
     sideFrame = ct.CTkFrame(master=root, width=50)
     sideFrame.pack(padx= 20, pady= 20, side= 'left',fill='both', expand=True)
@@ -60,7 +61,7 @@ def currentForcastPage():
     mainFrame = ct.CTkFrame(master= frame)
     mainFrame.pack(padx=10, pady=15, fill= 'both', expand=True, side='top')
 
-    scrollFrame = ct.CTkScrollableFrame(master= frame, orientation='horizontal',height= 50)
+    scrollFrame = ct.CTkScrollableFrame(master= mainFrame, orientation='horizontal',height= 50)
     scrollFrame.pack(padx=10, pady=15, fill= 'both', expand=True, side='bottom')
 
     menuLabel = ct.CTkLabel(master= sideFrame, text= "Menu", text_color= 'orange')
@@ -78,29 +79,33 @@ def currentForcastPage():
     quitBtn = ct.CTkButton(master = sideFrame, text= 'Quit', command= root.destroy)
     quitBtn.pack(padx= 10, pady = 20)
 
-    mainCurentTitle = ct.CTkLabel(master = mainFrame, text= 'Current Weather')
+    mainCurentTitle = ct.CTkLabel(master = mainFrame, text= 'Current Weather', font= ('', 16))
     mainCurentTitle.pack(padx= 10, pady= (10, 8), side= 'top')
 
     img = getWeatherIcon()
     img._size = [100, 100]
 
-    weatherIconLabel = ct.CTkLabel(master=mainFrame, text='', image= img)
-    weatherIconLabel.pack(padx=10, pady=(0, 0), side= 'top')
+    weatherLabel = ct.CTkLabel(master=mainFrame, text=CurWeather, font= ('', 13))
+    weatherLabel.pack(padx=9, pady=(0, 0), side= 'top')
 
-    curentTempLabel = ct.CTkLabel(master = mainFrame, text= CurrentTemp, font= ('', 20))
+    weatherImg = getWeatherIcon()
+    weatherImg._size = [60,60]
+    weatherImgLabel = ct.CTkLabel(master= mainFrame, text='', image=weatherImg)
+    weatherImgLabel.pack(padx = 9, pady = 5)
+
+    curentTempLabel = ct.CTkLabel(master = mainFrame, text= str(CurrentTemp) + '°', font= ('', 20))
     curentTempLabel.pack(padx= 10, pady= 7, side= 'top')
 
-    currentHighLabel = ct.CTkLabel(master = mainFrame, text= CurHighAndLow[1])
-    currentHighLabel.pack(padx= (30, 10), pady= 7, side= 'left')
+    currentHighLowLabel = ct.CTkLabel(master = mainFrame, text='H: ' + CurHighAndLow[0] + ' L: ' + CurHighAndLow[1])
+    currentHighLowLabel.pack(side= 'top')
 
-    curentLowLabel = ct.CTkLabel(master = mainFrame, text= CurHighAndLow[0])
-    curentLowLabel.pack(padx= 10, pady= 7, side= 'left')
-
+'''
     curentHumidityLabel = ct.CTkLabel(master = mainFrame, text= CurHumidity)
     curentHumidityLabel.pack(padx= 10, pady= 7, side= 'left')
 
     curentWindSpeedLabel = ct.CTkLabel(master = mainFrame, text= CurWindSpeed)
     curentWindSpeedLabel.pack(padx= 10, pady= 7, side= 'left')
+    '''
 
 
 
@@ -113,6 +118,8 @@ def getWeatherIcon():
         case 'Mainly Sunny':
             return ct.CTkImage(Image.open('./Assets/Mainly sunny.png'))
         case 'Mainly Clear':
+            return ct.CTkImage(Image.open('./Assets/Mainly clear.png'))
+        case 'Mostly Clear':
             return ct.CTkImage(Image.open('./Assets/Mainly clear.png'))
         case 'Partly Cloudly':
             return ct.CTkImage(Image.open('./Assets/Partly cloudy.png'))

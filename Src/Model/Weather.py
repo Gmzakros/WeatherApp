@@ -26,16 +26,14 @@ def getCurrentTemp():
     return int(dict[currentTime][0])
 
 def getHighLow():
-    units = ParseData.getData1Day()['daily_units']
-    data = ParseData.getData1Day()['daily']
+    data = ParseData.getData7Days()['daily']
     minStr = ''
-    minStr += str(int(data['temperature_2m_min'][0]))
-    minStr += units['temperature_2m_min']
+    minStr += str(int(data['temperature_2m_min'][0])) + '°'
 
     maxStr = ''
-    maxStr += str(int(data ['temperature_2m_max'][0]))
-    maxStr += units['temperature_2m_max']
+    maxStr += str(int(data ['temperature_2m_max'][0])) + '°'
 
+    print(maxStr + minStr)
     return maxStr, minStr
 
 def getHumidity():
@@ -78,7 +76,10 @@ def getWeatherPerDay():
 
 def getSunriseSunset():
     dict = ParseData.getData1Day()['daily']
-    return (dict['sunrise'][0], dict['sunset'][0])
+
+    sunrise = datetime.datetime.fromtimestamp(dict['sunrise'][0]).strftime('%H%M')
+    sunset  = datetime.datetime.fromtimestamp(dict['sunset'][0]).strftime('%H%M')
+    return (sunrise, sunset)
 
 def getWeeklyWeatherCode():
     weatherCodes = ParseData.getData1Day()['daily']['weathercode']
@@ -96,12 +97,11 @@ def getWeeklyWeatherCode():
 
 def processWeatherCode(code, weekly):
     t = time.localtime()
-    currentTime = time.strftime('%H', t)
+    currentTime = time.strftime('%H%M', t)
     sunriseSunset = getSunriseSunset()
     sunSet = False
-    if int(currentTime) < sunriseSunset[0] and int(currentTime) >= sunriseSunset[1]:
+    if int(currentTime) < int(sunriseSunset[0]) or int(currentTime) >= int(sunriseSunset[1]):
         sunSet = True
-
     match code:
         case 0:
             if not sunSet or weekly:
@@ -118,7 +118,10 @@ def processWeatherCode(code, weekly):
         case 3:
             return 'Cloudy'
         case 45:
-            return 'Mostly Sunny'
+            if not sunSet or weekly:
+                return 'Mostly Sunny'
+            else:
+                return 'Mostly Clear'
         case 48:
             return 'Rime Fog'
         case 51:
